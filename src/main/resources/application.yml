@@ -1,0 +1,42 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: online-pharmacy-system
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:pharmacy_db;MODE=MySQL;DATABASE_TO_UPPER=false;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false
+    username: sa
+    password:
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        web-allow-others: false
+  jpa:
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+  sql:
+    init:
+      mode: always
+  thymeleaf:
+    cache: false
+    encoding: UTF-8
+
+logging:
+  level:
+    com.example.pharmacy: debug
+    org.hibernate.SQL: debug
+
+llm:
+  api-url: https://api.deepseek.com/chat/completions
+  api-key: ${LLM_API_KEY:}
+  model: ${LLM_MODEL:deepseek-v4-flash}

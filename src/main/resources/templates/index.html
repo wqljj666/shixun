@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>康宁在线药房</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg pharmacy-navbar sticky-top">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center gap-2" th:href="@{/}">
+            <span class="brand-mark"><i class="bi bi-capsule-pill"></i></span>
+            <span>康宁在线药房</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
+                aria-controls="mainNavbar" aria-expanded="false" aria-label="切换导航">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mainNavbar">
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+                <li class="nav-item"><a class="nav-link active" th:href="@{/}">首页</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/medicines}">药品分类</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/ai-consult}">智能药师</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/cart}">购物车</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/orders}">我的订单</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<main>
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-7">
+                    <span class="soft-label"><i class="bi bi-shield-check"></i> 互联网药品服务平台</span>
+                    <h1>安全便捷的线上购药服务</h1>
+                    <p class="hero-subtitle">支持药品查询、在线下单、智能药师咨询与订单管理</p>
+                    <div class="hero-actions">
+                        <a class="btn btn-primary-pharmacy" th:href="@{/medicines}">
+                            <i class="bi bi-bag-plus"></i> 开始购药
+                        </a>
+                        <a class="btn btn-secondary-pharmacy" th:href="@{/ai-consult}"><i class="bi bi-chat-dots"></i> 咨询智能药师</a>
+                    </div>
+                    <div class="hero-metrics">
+                        <div>
+                            <strong>24h</strong>
+                            <span>在线服务</span>
+                        </div>
+                        <div>
+                            <strong>严选</strong>
+                            <span>正品药品</span>
+                        </div>
+                        <div>
+                            <strong>隐私</strong>
+                            <span>安全保护</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="hero-panel">
+                        <div class="panel-header">
+                            <div>
+                                <span class="status-dot"></span>
+                                <span>药师在线</span>
+                            </div>
+                            <span class="tag">健康咨询</span>
+                        </div>
+                        <div class="medicine-card">
+                            <div class="medicine-icon"><i class="bi bi-prescription2"></i></div>
+                            <div>
+                                <h2>用药前请确认适应症与禁忌</h2>
+                                <p>平台提供药品信息查询、订单跟踪与药师咨询入口。</p>
+                            </div>
+                        </div>
+                        <a class="quick-search" th:href="@{/medicines}">
+                            <i class="bi bi-search"></i>
+                            <span>搜索感冒、肠胃、维生素等常用药品</span>
+                        </a>
+                        <div class="panel-footer">
+                            <span><i class="bi bi-truck"></i> 配送可追踪</span>
+                            <span><i class="bi bi-lock"></i> 数据加密</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-block">
+        <div class="container">
+            <div class="section-heading">
+                <span class="soft-label">快捷入口</span>
+                <h2>常用服务</h2>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-xl-3">
+                    <a class="feature-card" th:href="@{/medicines}">
+                        <span class="feature-icon"><i class="bi bi-search-heart"></i></span>
+                        <h3>药品搜索</h3>
+                        <p>按名称、分类或症状快速查找所需药品。</p>
+                    </a>
+                </div>
+                <div class="col-md-6 col-xl-3">
+                    <a class="feature-card" th:href="@{/cart}">
+                        <span class="feature-icon"><i class="bi bi-cart-check"></i></span>
+                        <h3>购物车结算</h3>
+                        <p>统一管理待购药品，清晰核对数量与价格。</p>
+                    </a>
+                </div>
+                <div class="col-md-6 col-xl-3">
+                    <a class="feature-card" th:href="@{/orders}">
+                        <span class="feature-icon"><i class="bi bi-receipt"></i></span>
+                        <h3>我的订单</h3>
+                        <p>查看下单记录、支付状态与配送进度。</p>
+                    </a>
+                </div>
+                <div class="col-md-6 col-xl-3">
+                    <a class="feature-card" th:href="@{/ai-consult}">
+                        <span class="feature-icon"><i class="bi bi-person-heart"></i></span>
+                        <h3>智能药师咨询</h3>
+                        <p>获得用药提醒、健康建议与咨询指引。</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-block commitment-section">
+        <div class="container">
+            <div class="section-heading">
+                <span class="soft-label">服务承诺</span>
+                <h2>让每一次购药更安心</h2>
+            </div>
+            <div class="row g-4">
+                <div class="col-sm-6 col-lg-3">
+                    <div class="promise-card">
+                        <i class="bi bi-patch-check"></i>
+                        <h3>正品保障</h3>
+                        <p>药品来源规范，信息透明可查。</p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <div class="promise-card">
+                        <i class="bi bi-headset"></i>
+                        <h3>药师服务</h3>
+                        <p>提供用药咨询与健康服务入口。</p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <div class="promise-card">
+                        <i class="bi bi-shield-lock"></i>
+                        <h3>隐私保护</h3>
+                        <p>保护用户信息与订单数据安全。</p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <div class="promise-card">
+                        <i class="bi bi-lightning-charge"></i>
+                        <h3>快速配送</h3>
+                        <p>订单流程清晰，配送状态及时更新。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="site-footer">
+    <div class="container d-flex flex-column flex-md-row justify-content-between gap-2">
+        <span>© 2026 康宁在线药房</span>
+        <span>课程项目演示版本，仅用于教学实践</span>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

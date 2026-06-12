@@ -5,50 +5,58 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
 import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "ai_consultation")
-public class AiConsultationEntity {
+@Table(name = "ai_conversation")
+public class AiConversationEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 40)
+    @Column(nullable = false, unique = true, length = 40)
     private String conversationId;
 
     @Column(nullable = false)
     private Long userId;
 
-    @Column(nullable = false, length = 20)
-    private String role;
-
-    @Lob
-    @Column(nullable = false)
-    private String content;
+    @Column(nullable = false, length = 80)
+    private String title;
 
     @Column(nullable = false, length = 20)
     private String riskLevel;
 
-    @Column(length = 300)
-    private String riskKeywords;
+    @Column(nullable = false, length = 20)
+    private String status;
 
-    @Column(nullable = false)
-    private Boolean needHumanTransfer;
+    @Column(length = 300)
+    private String lastMessage;
 
     @Column(nullable = false)
     private LocalDateTime createdAt;
 
+    @Column(nullable = false)
+    private LocalDateTime updatedAt;
+
     @PrePersist
     public void prePersist() {
+        LocalDateTime now = LocalDateTime.now();
         if (createdAt == null) {
-            createdAt = LocalDateTime.now();
+            createdAt = now;
         }
+        if (updatedAt == null) {
+            updatedAt = now;
+        }
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        updatedAt = LocalDateTime.now();
     }
 
     public Long getId() {
@@ -75,20 +83,12 @@ public class AiConsultationEntity {
         this.userId = userId;
     }
 
-    public String getRole() {
-        return role;
+    public String getTitle() {
+        return title;
     }
 
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getRiskLevel() {
@@ -99,20 +99,20 @@ public class AiConsultationEntity {
         this.riskLevel = riskLevel;
     }
 
-    public String getRiskKeywords() {
-        return riskKeywords;
+    public String getStatus() {
+        return status;
     }
 
-    public void setRiskKeywords(String riskKeywords) {
-        this.riskKeywords = riskKeywords;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public Boolean getNeedHumanTransfer() {
-        return needHumanTransfer;
+    public String getLastMessage() {
+        return lastMessage;
     }
 
-    public void setNeedHumanTransfer(Boolean needHumanTransfer) {
-        this.needHumanTransfer = needHumanTransfer;
+    public void setLastMessage(String lastMessage) {
+        this.lastMessage = lastMessage;
     }
 
     public LocalDateTime getCreatedAt() {
@@ -121,5 +121,13 @@ public class AiConsultationEntity {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

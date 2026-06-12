@@ -2,13 +2,22 @@ package com.example.pharmacy.dto;
 
 public class ConsultationRequest {
 
-    private String question;
+    private String conversationId;
+    private String message;
 
-    public String getQuestion() {
-        return question;
+    public String getConversationId() {
+        return conversationId;
     }
 
-    public void setQuestion(String question) {
-        this.question = question;
+    public void setConversationId(String conversationId) {
+        this.conversationId = conversationId;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

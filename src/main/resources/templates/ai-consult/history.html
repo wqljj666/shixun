@@ -26,7 +26,7 @@
         <div class="page-title-row">
             <div>
                 <span class="soft-label"><i class="bi bi-clock-history"></i> 咨询记录</span>
-                <h1>历史智能药师咨询</h1>
+                <h1>历史智能药师会话</h1>
             </div>
             <a class="btn btn-primary-pharmacy" th:href="@{/ai-consult}">
                 <i class="bi bi-plus-circle"></i> 发起咨询
@@ -36,22 +36,20 @@
         <div class="empty-state" th:if="${#lists.isEmpty(records)}">
             <i class="bi bi-chat-square-heart"></i>
             <h1>暂无咨询记录</h1>
-            <p>提交智能药师咨询后，系统会自动保存问题、回复和风险等级。</p>
+            <p>提交智能药师咨询后，系统会按会话保存完整多轮聊天记录。</p>
             <a class="btn btn-primary-pharmacy" th:href="@{/ai-consult}">立即咨询</a>
         </div>
 
         <div class="consult-history-list" th:if="${!#lists.isEmpty(records)}">
-            <article class="consult-record-card" th:each="record : ${records}">
+            <a class="consult-record-card" th:each="record : ${records}"
+               th:href="@{/ai-consult(conversationId=${record.conversationId})}">
                 <div class="consult-record-head">
                     <span th:class="|risk-badge risk-${record.riskLevel}|" th:text="${record.riskLevelText}">低风险</span>
-                    <time th:text="${#temporals.format(record.createdAt, 'yyyy-MM-dd HH:mm')}">2026-01-01 10:00</time>
+                    <time th:text="${#temporals.format(record.updatedAt, 'yyyy-MM-dd HH:mm')}">2026-01-01 10:00</time>
                 </div>
-                <h2 th:text="${record.question}">咨询问题</h2>
-                <p th:text="${#strings.abbreviate(record.answer, 150)}">回复摘要</p>
-                <div class="risk-keywords" th:if="${!#lists.isEmpty(record.riskKeywords)}">
-                    <span th:each="keyword : ${record.riskKeywords}" th:text="${keyword}">关键词</span>
-                </div>
-            </article>
+                <h2 th:text="${record.title}">咨询标题</h2>
+                <p th:text="${record.lastMessage}">最后一条消息</p>
+            </a>
         </div>
     </section>
 </main>

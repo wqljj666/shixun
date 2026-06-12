@@ -1,16 +1,18 @@
 package com.example.pharmacy.service;
 
+import com.example.pharmacy.entity.AiConsultationEntity;
+import com.example.pharmacy.enums.ConsultationRoleEnum;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
 /**
  * 咨询风险识别服务。
  *
- * <p>根据课程要求维护高风险关键词列表，用于识别孕妇、儿童、老人、过敏史、处方药、
- * 严重症状等需要人工药师或医生确认的场景。</p>
+ * <p>根据课程要求维护高风险关键词列表。风险识别不仅查看当前消息，也会结合当前会话的历史上下文，
+ * 用于识别孕妇、儿童、老人、过敏史、处方药、严重症状等需要人工药师或医生确认的场景。</p>
  */
+@Service
 public class RiskDetectService {
 
     private static final List<String> HIGH_RISK_KEYWORDS = List.of(
@@ -19,17 +21,25 @@ public class RiskDetectService {
     );
 
     /**
-     * 检测用户咨询内容中命中的高风险关键词。
+     * 检测当前消息和历史上下文中命中的高风险关键词。
      *
-     * @param question 用户输入的症状、用药问题或健康咨询内容
+     * @param currentMessage 用户当前输入内容
+     * @param contextMessages 当前会话最近的历史消息
      * @return 命中的高风险关键词列表；未命中时返回空列表
      */
-    public List<String> detectHighRiskKeywords(String question) {
-        if (question == null || question.isBlank()) {
-            return List.of();
+    public List<String> detectHighRiskKeywords(String currentMessage, List<AiConsultationEntity> contextMessages) {
+        StringBuilder context = new StringBuilder();
+        if (contextMessages != null) {
+            contextMessages.stream()
+                    .filter(message -> ConsultationRoleEnum.USER.name().equals(message.getRole()))
+                    .forEach(message -> context.append(message.getContent()).append('\n'));
         }
+        if (currentMessage != null) {
+            context.append(currentMessage);
+        }
+        String text = context.toString();
         return HIGH_RISK_KEYWORDS.stream()
-                .filter(question::contains)
+                .filter(text::contains)
                 .toList();
     }
 }

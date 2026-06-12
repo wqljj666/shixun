@@ -1,40 +1,33 @@
 package com.example.pharmacy.vo;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConsultationResponseVO {
+public class ConsultationMessageVO {
 
-    private String conversationId;
-    private String userMessage;
-    private String aiReply;
+    private String role;
+    private String content;
     private String riskLevel;
     private String riskLevelText;
     private List<String> riskKeywords = new ArrayList<>();
     private Boolean needHumanTransfer;
+    private LocalDateTime createdAt;
 
-    public String getConversationId() {
-        return conversationId;
+    public String getRole() {
+        return role;
     }
 
-    public void setConversationId(String conversationId) {
-        this.conversationId = conversationId;
+    public void setRole(String role) {
+        this.role = role;
     }
 
-    public String getUserMessage() {
-        return userMessage;
+    public String getContent() {
+        return content;
     }
 
-    public void setUserMessage(String userMessage) {
-        this.userMessage = userMessage;
-    }
-
-    public String getAiReply() {
-        return aiReply;
-    }
-
-    public void setAiReply(String aiReply) {
-        this.aiReply = aiReply;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public String getRiskLevel() {
@@ -67,5 +60,13 @@ public class ConsultationResponseVO {
 
     public void setNeedHumanTransfer(Boolean needHumanTransfer) {
         this.needHumanTransfer = needHumanTransfer;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 }

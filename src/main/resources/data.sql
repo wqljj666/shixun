@@ -3,6 +3,7 @@ DELETE FROM order_item;
 DELETE FROM pharmacy_order;
 DELETE FROM cart_item;
 DELETE FROM ai_consultation;
+DELETE FROM ai_conversation;
 DELETE FROM medicine;
 DELETE FROM medicine_category;
 

@@ -7,5 +7,7 @@ import java.util.List;
 
 public interface AiConsultationRepository extends JpaRepository<AiConsultationEntity, Long> {
 
-    List<AiConsultationEntity> findByUserIdOrderByCreatedAtDesc(Long userId);
+    List<AiConsultationEntity> findByConversationIdAndUserIdOrderByCreatedAtAsc(String conversationId, Long userId);
+
+    List<AiConsultationEntity> findTop10ByConversationIdAndUserIdOrderByCreatedAtDesc(String conversationId, Long userId);
 }

@@ -202,3 +202,66 @@ mvn spring-boot:run
 ```text
 https://github.com/wqljj666/shixun.git
 ```
+
+## 单元测试说明
+
+本项目使用的测试框架和工具：
+
+- JUnit 5
+- Mockito
+- Spring Boot Test
+- MockMvc
+- H2 测试数据库配置
+
+运行测试命令：
+
+```bash
+mvn clean test
+```
+
+本次测试覆盖模块：
+
+- 药品信息模块
+- 购物车与订单模块
+- 智能药师咨询模块
+
+药品信息模块测试内容：
+
+- 药品关键词搜索
+- 药品分类筛选
+- 药品详情查询
+- 药品不存在时抛出业务异常
+- OTC / 处方药字段返回是否正确
+- 药品列表页和详情页 Controller 模型数据
+
+购物车与订单模块测试内容：
+
+- 加入购物车
+- 修改购物车数量
+- 删除购物车商品
+- 购物车总金额计算
+- 创建订单
+- 订单金额计算
+- 库存不足不能创建订单
+- 处方药不能直接下单
+- 取消待支付订单
+- 已支付订单不能取消
+- 模拟支付后订单状态变为已支付
+- 订单 Controller 页面跳转与模型数据
+
+智能药师咨询模块测试内容：
+
+- 普通问题返回低风险咨询结果
+- 高风险关键词识别
+- 高风险咨询 `needHumanTransfer = true`
+- 多轮连续对话按 `conversationId` 保存和查询历史消息
+- 未配置 API Key 时使用本地模拟回复
+- AI 回复必须包含免责声明：“AI 回答仅供参考，不替代医生诊断或执业药师审核。”
+- 智能药师 Controller 的页面接口和 JSON 接口
+
+智能模块测试时避免真实调用大模型 API 的方式：
+
+- 测试配置 `src/test/resources/application-test.yml` 不配置真实 API Key。
+- `LargeModelServiceTest` 使用空 API Key，验证本地 fallback 逻辑。
+- `AiConsultationServiceTest` 使用 Mockito mock `LargeModelService`，不访问 DeepSeek 或任何外部网络。
+- 测试代码中不写入真实 API Key。
